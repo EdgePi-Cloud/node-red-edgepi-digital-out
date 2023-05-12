@@ -1,5 +1,5 @@
 <script type="text/javascript">
-    RED.nodes.registerType('edgepi-thermocouple-node',{
+    RED.nodes.registerType('edgepi-digital-out-node',{
         category: 'Osensa EdgePi',
         color: '#a6bbcf',
         defaults: {
@@ -7,20 +7,20 @@
         },
         inputs:1,
         outputs:1,
-        icon: "font-awesome/fa-thermometer-2",
+        icon: "arrow-right-from-bracket-solid.svg",
         label: function() {
-            return this.name||"thermocouple-node";
+            return this.name||"digial-out-node";
         }
     });
 </script>
 
-<script type="text/html" data-template-name="edgepi-thermocouple-node">
+<script type="text/html" data-template-name="edgepi-digital-out-node">
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
     </div>
 </script>
 
-<script type="text/html" data-help-name="edgepi-thermocouple-node">
-    <p>A node that handles handles passing commands to RTU Thermocoupler and displaying output</p>
+<script type="text/html" data-help-name="edgepi-digital-out-node">
+    <p>A node that handles passing commands to EdgePi digital output</p>
 </script>
