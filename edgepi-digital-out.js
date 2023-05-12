@@ -23,6 +23,10 @@ module.exports = function(RED) {
                 node.error(RED._("edgepi-digital-out:error:child.disconnected"), msg);
             }
             // send message probably
+            if(node.output){
+                msg.payload = node.output;
+                send(msg)
+            }      
         }
 
         // creates child process instance which will run command located at executablePath
@@ -40,13 +44,14 @@ module.exports = function(RED) {
 
         // listen to output from child process
         node.child.stdout.on('data', function (data) {
+            node.output = data;
             node.log(`edgepi-digital-out: child output: ${data}`);
         });
 
         node.child.stderr.on('data', function (data) {
             // Py logger prints to stderr
             if (data.includes("INFO"))
-                node.log(data)
+                node.log(data);
             else
                 node.error(RED._(`edgepi-digital-out:error:childprocess-stderr: ${data}`));
         });

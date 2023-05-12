@@ -1,3 +1,4 @@
+#!/bin/bash
 #!/usr/bin/env bash
 
 python_cmd='python'
@@ -13,4 +14,4 @@ fi
 
 venv_path=$VENVDIR/bin/
 
-$venv_path$python_cmd -u $BASEDIR/edgepi-thermocouple.py $@
+$venv_path$python_cmd -u $BASEDIR/edgepi-digital-out.py $@

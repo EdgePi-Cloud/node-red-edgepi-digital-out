@@ -1,5 +1,5 @@
 {
-    "name": "node-red-digital-out",
+    "name": "node-red-edgepi-digital-out",
     "version": "1.0.0",
     "description": "a node for demonstrating use of Python scripts and libraries for implementing functionality. This node uses a Python script to interact with the EdgePi digital output.",
     "main": "edgepi-digital-out.js",

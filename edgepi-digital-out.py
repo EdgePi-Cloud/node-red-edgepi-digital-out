@@ -21,8 +21,9 @@ if len(sys.argv) > 1:
             # exit signal from parent process or user exit from child process
             if 'exit' in cmd or cmd == '0':
                 sys.exit(0)
+            elif cmd == '2':
+                print("Hello")
         except(EOFError, SystemExit, KeyboardInterrupt):
-            pass
             sys.exit(0)
 else:
     print("Number of commands must equal 2")
