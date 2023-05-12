@@ -1,26 +1,49 @@
 <script type="text/javascript">
-    RED.nodes.registerType('edgepi-digital-out-node',{
-        category: 'Osensa EdgePi',
-        color: '#a6bbcf',
-        defaults: {
-            name: { value:"" },
-        },
-        inputs:1,
-        outputs:1,
-        icon: "arrow-right-from-bracket-solid.svg",
-        label: function() {
-            return this.name||"digial-out-node";
-        }
-    });
+	RED.nodes.registerType('edgepi-digital-out-node',{
+		category: 'Osensa EdgePi',
+		color: '#a6bbcf',
+		defaults: {
+				name: { value:"" },
+		},
+		inputs:1,
+		outputs:1,
+	  icon: "arrow-right-from-bracket-solid.svg",
+		label: function() {
+			return this.name||"digial-out-node";
+		}
+	});
 </script>
 
 <script type="text/html" data-template-name="edgepi-digital-out-node">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name">
+	</div>
+	<div class="form-row">
+		<span class="button-group">
+			<button type="button" class="red-ui-button toggle selected my-button-group">
+				b1
+			</button><button type="button" class="red-ui-button toggle my-button-group">
+				b2
+			</button>
+			<button type="button" class="red-ui-button toggle my-button-group">
+				b3
+			</button><button type="button" class="red-ui-button toggle selected my-button-group">
+				b4
+			</button><button type="button" class="red-ui-button toggle my-button-group">
+				b5
+			</button><button type="button" class="red-ui-button toggle my-button-group">
+				b6
+			</button><button type="button" class="red-ui-button toggle selected my-button-group">
+				b7
+			</button><button type="button" class="red-ui-button toggle my-button-group">
+				b8
+			</button>
+			
+		</span>
+	</div>
 </script>
 
 <script type="text/html" data-help-name="edgepi-digital-out-node">
-    <p>A node that handles passing commands to EdgePi digital output</p>
+	<p>A node that handles passing commands to EdgePi digital output</p>
 </script>
