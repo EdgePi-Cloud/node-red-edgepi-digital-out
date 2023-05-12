@@ -22,10 +22,7 @@ module.exports = function(RED) {
                 node.status({fill:"red", shape:"ring", text:"disconnected from child"});
                 node.error(RED._("edgepi-digital-out:error:child.disconnected"), msg);
             }
-            if (node.temperature) {
-                msg.payload = node.temperature;
-                send(msg);
-            }
+            // send message probably
         }
 
         // creates child process instance which will run command located at executablePath
@@ -43,8 +40,6 @@ module.exports = function(RED) {
 
         // listen to output from child process
         node.child.stdout.on('data', function (data) {
-            // data is an arrayBuffer object
-            node.temperature = parseFloat(data);
             node.log(`edgepi-digital-out: child output: ${data}`);
         });
 
