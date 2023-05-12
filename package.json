@@ -11,7 +11,7 @@
       "url": "git+https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out.git"
     },
     "author": "iaj2",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
       "url": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out/issues"
     },
