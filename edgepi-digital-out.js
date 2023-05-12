@@ -2,9 +2,9 @@ module.exports = function(RED) {
     const spawn = require('child_process').spawn;
 
     // file_path to edgepi-thermocouple bash script for passing commands to Python script
-    const executablePath = __dirname + '/edgepi-thermocouple'
+    const executablePath = __dirname + '/edgepi-digital-out'
 
-    function ThermocoupleNode(config) {
+    function DigitalOutNode(config) {
         RED.nodes.createNode(this, config);
         const node = this;
 
@@ -90,5 +90,5 @@ module.exports = function(RED) {
             else { done(); }
         });
     }
-    RED.nodes.registerType("edgepi-thermocouple-node", ThermocoupleNode);
+    RED.nodes.registerType("edgepi-digital-out-node", DigitalOutNode);
 }
