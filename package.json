@@ -2,7 +2,7 @@
     "name": "node-red-digital-out",
     "version": "1.0.0",
     "description": "a node for demonstrating use of Python scripts and libraries for implementing functionality. This node uses a Python script to interact with the EdgePi digital output.",
-    "main": "edgepi-thermocouple.js",
+    "main": "edgepi-digital-out.js",
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -17,7 +17,7 @@
     },
     "node-red": {
       "nodes": {
-        "edgepi-digital-out": "edgepi-thermocouple.js"
+        "edgepi-digital-out": "edgepi-digital-out.js"
       }
     },
     "homepage": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out#readme",
