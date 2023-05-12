@@ -1,7 +1,7 @@
 module.exports = function(RED) {
     const spawn = require('child_process').spawn;
 
-    // file_path to edgepi-thermocouple bash script for passing commands to Python script
+    // file_path to edgepi-digital-out bash script for passing commands to Python script
     const executablePath = __dirname + '/edgepi-digital-out'
 
     function DigitalOutNode(config) {
@@ -15,12 +15,12 @@ module.exports = function(RED) {
                     if (done) { done(); }
                 });
                 node.status({fill:"green", shape:"dot", text:"input to child sent"});
-                node.log(`edgepi-thermocouple: input to parent: ${msg.payload}`);
+                node.log(`edgepi-digital-out: input to parent: ${msg.payload}`);
             }
             else {
                 // logs error to Node-RED's console.
                 node.status({fill:"red", shape:"ring", text:"disconnected from child"});
-                node.error(RED._("edgepi-thermocouple:error:child.disconnected"), msg);
+                node.error(RED._("edgepi-digital-out:error:child.disconnected"), msg);
             }
             if (node.temperature) {
                 msg.payload = node.temperature;
@@ -45,7 +45,7 @@ module.exports = function(RED) {
         node.child.stdout.on('data', function (data) {
             // data is an arrayBuffer object
             node.temperature = parseFloat(data);
-            node.log(`edgepi-thermocouple: child output: ${data}`);
+            node.log(`edgepi-digital-out: child output: ${data}`);
         });
 
         node.child.stderr.on('data', function (data) {
@@ -53,7 +53,7 @@ module.exports = function(RED) {
             if (data.includes("INFO"))
                 node.log(data)
             else
-                node.error(RED._(`edgepi-thermocouple:error:childprocess-stderr: ${data}`));
+                node.error(RED._(`edgepi-digital-out:error:childprocess-stderr: ${data}`));
         });
 
         /* 
@@ -69,12 +69,12 @@ module.exports = function(RED) {
             node.child = null;
             if (node.finished) {
                 node.finished();
-                node.log(`edgepi-thermocouple: child process exit code: ${code}`);
+                node.log(`edgepi-digital-out: child process exit code: ${code}`);
                 node.status({fill:"grey",shape:"ring",text:"child process closed."});
             }
             else {
                 node.status({fill:"red",shape:"ring",text:"child process stopped before parent"});
-                node.warn(RED._(`edgepi-thermocouple:warning: childprocess disconnected with exit code: ${code}`));
+                node.warn(RED._(`edgepi-digital-out:warning: childprocess disconnected with exit code: ${code}`));
             }
         });
 
@@ -85,7 +85,7 @@ module.exports = function(RED) {
                 node.finished = done;
                 node.child.stdin.write("exit");
                 node.child.kill(); 
-                node.log("edgepi-thermocouple: exited parent process");
+                node.log("edgepi-digital-out: exited parent process");
             }
             else { done(); }
         });
