@@ -15,7 +15,7 @@
     - `$ chmod +x edgepi-thermocouple`
 *Use if you encounter an error such as the following:
 ```
-EACC            ES
+EACCES
     at Process.ChildProcess._handle.onexit (node:internal/child_process:285:19)
     at onErrorNT (node:internal/child_process:485:16)
     at processTicksAndRejections (node:internal/process/task_queues:83:21)
