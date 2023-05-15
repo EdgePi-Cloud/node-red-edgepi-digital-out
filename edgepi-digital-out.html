@@ -10,7 +10,13 @@
 	  icon: "arrow-right-from-bracket-solid.svg",
 		label: function() {
 			return this.name||"digial-out-node";
-		}
+		},
+		oneditprepare : function(){
+		$(".my-button-group").on("click", function() {
+		$(".my-button-group").removeClass("selected");
+		$(this).addClass("selected");
+		});
+	}
 	});
 </script>
 
@@ -22,25 +28,25 @@
 	<div class="form-row">
 		<span class="button-group">
 			<button type="button" class="red-ui-button toggle selected my-button-group">
-				OUT1
+				D-OUT1
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT2
+				D-OUT2
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT3
+				D-OUT3
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT4
+				D-OUT4
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT5
+				D-OUT5
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT6
+				D-OUT6
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT7
+				D-OUT7
 			</button><button type="button" class="red-ui-button toggle my-button-group">
-				OUT8
+				D-OUT8
 			</button>
-			
 		</span>
 	</div>
+	
 	
 </script>
 
