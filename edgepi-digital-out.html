@@ -4,6 +4,7 @@
 		color: '#a6bbcf',
 		defaults: {
 				name: { value:"" },
+        channel: {value:""}
 		},
 		inputs:1,
 		outputs:1,
@@ -11,12 +12,28 @@
 		label: function() {
 			return this.name||"digial-out-node";
 		},
+    channel: function(){
+      return this.channel||"D-OUT1";
+    },
 		oneditprepare : function(){
-		$(".my-button-group").on("click", function() {
-		$(".my-button-group").removeClass("selected");
-		$(this).addClass("selected");
-		});
-	}
+      $("#node-input-select-channels").typedInput({
+    types: [
+        {
+            value:"channel",
+            options:[
+              {value: "dout1", label: "D-OUT1"},
+              {value: "dout2", label: "D-OUT2"},
+              {value: "dout3", label: "D-OUT3"},
+              {value: "dout4", label: "D-OUT4"},
+              {value: "dout5", label: "D-OUT5"},
+              {value: "dout6", label: "D-OUT6"},
+              {value: "dout7", label: "D-OUT7"},
+              {value: "dout8", label: "D-OUT8"},
+            ]
+        }
+    ]
+})
+	},
 	});
 </script>
 
@@ -24,31 +41,20 @@
 	<div class="form-row">
 		<label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
 		<input type="text" id="node-input-name" placeholder="Name">
-	</div>
-	<div class="form-row">
-		<span class="button-group">
-			<button type="button" class="red-ui-button toggle selected my-button-group">
-				D-OUT1
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT2
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT3
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT4
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT5
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT6
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT7
-			</button><button type="button" class="red-ui-button toggle my-button-group">
-				D-OUT8
-			</button>
-		</span>
-	</div>
-	
-	
+	</div>	
+  <div class="form-row">
+    <input type="text" id="node-input-select-channels">
+  </div>
+  <div>
+    <span>
+      <input type="radio" id="high/on" name="On/Off" value="High/On">
+      <label for="high/on">High/On</label>
+      <input type="radio" id="low/off" name="On/Off" value="Low/Off">
+      <label for="low/off">Low/Off</label>
+    </span>
+  </div>
 </script>
+
 
 <script type="text/html" data-help-name="edgepi-digital-out-node">
 	<p>A node that handles passing commands to EdgePi digital output</p>
