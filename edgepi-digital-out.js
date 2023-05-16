@@ -9,12 +9,11 @@ module.exports = function(RED) {
         const node = this;
         node.channelType = config.channelType;
         node.powerOn = config.powerOn;
-        console.log(node.powerOn);
 
         function inputlistener(msg, send, done) {
             if (node.child != null) {
                 // send input to child process using stdin (Py script)
-                node.child.stdin.write(Command+"\n", () => {
+                node.child.stdin.write(command+"\n", () => {
                     if (done) { done(); }
                 });
                 node.status({fill:"green", shape:"dot", text:"input to child sent"});
@@ -32,11 +31,12 @@ module.exports = function(RED) {
             }      
         }
         
-        if(node.channelType === "dout4" && node.powerOn) Command = 5;
-        else Command = 0;
-        console.log(Command);
+        // log node properties and command
+        console.log(node.channelType);
+        console.log(node.powerOn);
+        console.log(command);
         
-        node.child = spawn(executablePath, [Command]);
+        node.child = spawn(executablePath, [command]);
 
         // to-do: handle spawn error
         
