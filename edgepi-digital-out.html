@@ -1,26 +1,50 @@
 <script type="text/javascript">
-    RED.nodes.registerType('edgepi-digital-out-node',{
-        category: 'Osensa EdgePi',
-        color: '#a6bbcf',
-        defaults: {
-            name: { value:"" },
-        },
-        inputs:1,
-        outputs:1,
-        icon: "arrow-right-from-bracket-solid.svg",
-        label: function() {
-            return this.name||"digial-out-node";
-        }
-    });
+	RED.nodes.registerType('edgepi-digital-out-node',{
+		category: 'Osensa EdgePi',
+		color: '#a6bbcf',
+		defaults: {
+				name: {value:"" },
+        channelType: {value:"dout1"},
+        powerOn: {value: false},
+
+		},
+		inputs:1,
+		outputs:1,
+	  icon: "arrow-right-from-bracket-solid.svg",
+		label: function() {
+			return this.name||"digial-out-node";
+    },
+	});
 </script>
 
 <script type="text/html" data-template-name="edgepi-digital-out-node">
-    <div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
-        <input type="text" id="node-input-name" placeholder="Name">
-    </div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+		<input type="text" id="node-input-name" placeholder="Name">
+	</div>	
+  <div class="form-row">
+    <label for="node-input-channelType">Channel</label>
+    <select id="node-input-channelType">
+      <option value="dout1">D-OUT1</option>
+      <option value="dout2">D-OUT2</option>
+      <option value="dout3">D-OUT3</option>
+      <option value="dout4">D-OUT4</option>
+      <option value="dout5">D-OUT5</option>
+      <option value="dout6">D-OUT6</option>
+      <option value="dout7">D-OUT7</option>
+      <option value="dout8">D-OUT8</option>
+    </select>
+  </div>
+  <div class="form-row">
+    <span>
+    <input type="checkbox" name="radios" id="node-input-powerOn" style="width:auto; margin:auto !important">
+    <label for="node-input-powerOn"  style="width:auto; margin:auto !important">High/On</label>
+    <p style="color:#606060; display:inline; margin:auto auto auto 10px !important">(Default:Low/Off)</p>
+  </span>
+  </div>
 </script>
 
+
 <script type="text/html" data-help-name="edgepi-digital-out-node">
-    <p>A node that handles passing commands to EdgePi digital output</p>
+	<p>A node that handles passing commands to EdgePi digital output</p>
 </script>
