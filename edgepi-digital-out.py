@@ -27,7 +27,7 @@ while True:
         # get on/off
         on_off = True if inputs[1].strip() == "true" else False
 
-        # action on by input gathered
+        # action on dout based on input gathered
         digital_output.digital_output_direction(channel, False)
         digital_output.digital_output_state(channel, on_off)
         
