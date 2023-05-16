@@ -7,11 +7,14 @@ module.exports = function(RED) {
     function DigitalOutNode(config) {
         RED.nodes.createNode(this, config);
         const node = this;
+        node.channelType = config.channelType;
+        node.powerOn = config.powerOn;
+        console.log(node.powerOn);
 
         function inputlistener(msg, send, done) {
             if (node.child != null) {
                 // send input to child process using stdin (Py script)
-                node.child.stdin.write(sampleCommand+"\n", () => {
+                node.child.stdin.write(Command+"\n", () => {
                     if (done) { done(); }
                 });
                 node.status({fill:"green", shape:"dot", text:"input to child sent"});
@@ -28,11 +31,12 @@ module.exports = function(RED) {
                 send(msg)
             }      
         }
-
-        // creates child process instance which will run command located at executablePath
-        // with the argument 2 (single-shot sample).
-        sampleCommand = 2;
-        node.child = spawn(executablePath, [sampleCommand]);
+        
+        if(node.channelType === "dout4" && node.powerOn) Command = 5;
+        else Command = 0;
+        console.log(Command);
+        
+        node.child = spawn(executablePath, [Command]);
 
         // to-do: handle spawn error
         
