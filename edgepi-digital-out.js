@@ -13,7 +13,7 @@ module.exports = function(RED) {
         function inputlistener(msg, send, done) {
             if (node.child != null) {
                 // send input to child process using stdin (Py script)
-                node.child.stdin.write(command+"\n", () => {
+                node.child.stdin.write(this.channelType+","+this.powerOn+"\n", () => {
                     if (done) { done(); }
                 });
                 node.status({fill:"green", shape:"dot", text:"input to child sent"});
@@ -30,13 +30,13 @@ module.exports = function(RED) {
                 send(msg)
             }      
         }
-        
-        // log node properties and command
+
+        // log node properties and command for testing
         console.log(node.channelType);
         console.log(node.powerOn);
-        console.log(command);
         
-        node.child = spawn(executablePath, [command]);
+        // create new child process
+        node.child = spawn(executablePath);
 
         // to-do: handle spawn error
         
