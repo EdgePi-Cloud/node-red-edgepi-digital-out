@@ -13,30 +13,26 @@ except ModuleNotFoundError as e:
     _logger.error(f'Failed to load EdgePi modules: {e}')
     sys.exit(0)
 
-# node channel property to SDK enum
-channelType_to_enum = {"dout1": GpioPins.DOUT1, "dout2": GpioPins.DOUT2, "dout3": GpioPins.DOUT3, "dout4": GpioPins.DOUT4,
-"dout5": GpioPins.DOUT5, "dout6":GpioPins.DOUT6, "dout7":GpioPins.DOUT7, "dout8": GpioPins.DOUT8}
-
 # keep receiving commands from parent process
 while True:
     try:
-        # parse input from js file
-        inputs = input().split(",")
-        # get channel enum
-        channelType = inputs[0]
-        channel_enum = channelType_to_enum[channelType]
-        # get on/off
-        on_off = True if inputs[1].strip() == "true" else False
+        # get input from js file
+        inputs = input()
 
-        # action on dout based on input gathered
-        digital_output.digital_output_direction(channel_enum, False)
-        digital_output.digital_output_state(channel_enum, on_off)
+        # exit signal from parent process 
+        if 'exit' in inputs:
+            sys.exit(0)
 
-        # print message for payload
-        on_off_msg = "ON" if on_off else "OFF"
-        print(channelType.upper() + ": " + on_off_msg)
+        # parse input [input1,input2] -> [DOUT_Pin,state]
+        inputs = inputs.split(',')
 
+        # get channel enum and state
+        DOUT_Pin = inputs[0]
+        state = True if inputs[1].strip() == "true" else False
+
+        # action on DOUT pin based on input gathered
+        digital_output.digital_output_direction(GpioPins[DOUT_Pin], False)
+        digital_output.digital_output_state(GpioPins[DOUT_Pin], state)
         
-    # TO-DO : check exceptions
-    except(EOFError, SystemExit, KeyboardInterrupt, KeyError):
+    except(EOFError, SystemExit, KeyboardInterrupt):
         sys.exit(0)

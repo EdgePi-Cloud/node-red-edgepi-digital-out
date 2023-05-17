@@ -5,16 +5,17 @@ module.exports = function(RED) {
     const executablePath = __dirname + '/edgepi-digital-out'
 
     function DigitalOutNode(config) {
+        // Create new node instance with config from last deploy
         RED.nodes.createNode(this, config);
         const node = this;
-        // Get node properties
-        node.channelType = config.channelType;
-        node.powerOn = config.powerOn;
+        // Get node properties from config
+        node.DOUT_Pin = config.DOUT_Pin;
+        node.state = config.state;
 
         function inputlistener(msg, send, done) {
             if (node.child != null) {
                 // send input to child process using stdin (Py script)
-                node.child.stdin.write(this.channelType+","+this.powerOn+"\n", () => {
+                node.child.stdin.write(`${this.DOUT_Pin},${this.state}\n`, () => {
                     if (done) { done(); }
                 });
                 node.status({fill:"green", shape:"dot", text:"input to child sent"});
@@ -25,7 +26,7 @@ module.exports = function(RED) {
                 node.status({fill:"red", shape:"ring", text:"disconnected from child"});
                 node.error(RED._("edgepi-digital-out:error:child.disconnected"), msg);
             }
-            // send message
+            // send message probably
             if(node.output){
                 msg.payload = node.output;
                 send(msg)
@@ -33,8 +34,8 @@ module.exports = function(RED) {
         }
 
         // log node properties and command for testing
-        console.log(node.channelType);
-        console.log(node.powerOn);
+        console.log(node.DOUT_Pin);
+        console.log(node.state);
         
         // create new child process
         node.child = spawn(executablePath);
@@ -49,7 +50,6 @@ module.exports = function(RED) {
 
         // listen to output from child process
         node.child.stdout.on('data', function (data) {
-            node.output = Buffer.from(data).toString();
             node.log(`edgepi-digital-out: child output: ${data}`);
         });
 
