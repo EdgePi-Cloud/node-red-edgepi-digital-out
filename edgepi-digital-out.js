@@ -7,6 +7,7 @@ module.exports = function(RED) {
     function DigitalOutNode(config) {
         RED.nodes.createNode(this, config);
         const node = this;
+        // Get node properties
         node.channelType = config.channelType;
         node.powerOn = config.powerOn;
 

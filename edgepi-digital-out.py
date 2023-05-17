@@ -31,5 +31,6 @@ while True:
         digital_output.digital_output_direction(channel, False)
         digital_output.digital_output_state(channel, on_off)
         
-    except(EOFError, SystemExit, KeyboardInterrupt):
+    # TO-DO : check exceptions
+    except(EOFError, SystemExit, KeyboardInterrupt, KeyError):
         sys.exit(0)
