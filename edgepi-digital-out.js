@@ -25,7 +25,7 @@ module.exports = function(RED) {
                 node.status({fill:"red", shape:"ring", text:"disconnected from child"});
                 node.error(RED._("edgepi-digital-out:error:child.disconnected"), msg);
             }
-            // send message probably
+            // send message
             if(node.output){
                 msg.payload = node.output;
                 send(msg)
@@ -49,7 +49,7 @@ module.exports = function(RED) {
 
         // listen to output from child process
         node.child.stdout.on('data', function (data) {
-            node.output = data;
+            node.output = Buffer.from(data).toString();
             node.log(`edgepi-digital-out: child output: ${data}`);
         });
 
