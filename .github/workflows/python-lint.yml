@@ -2,13 +2,7 @@
 
 name: Pylint
 
-on:
-push:
-  branches:
-   - 'dev'
-pull_request:
-   branches:
-   - 'dev'
+on: push
 
 jobs:
 lint:
