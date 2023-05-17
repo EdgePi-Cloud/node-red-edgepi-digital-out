@@ -42,7 +42,7 @@ module.exports = function(RED) {
 
         // to-do: handle spawn error
         
-        node.child ? node.status({fill:"green", shape:"ring", text:"connected to child"}) :
+        node.child ? node.status({fill:"green", shape:"ring", text:"connected to child"}) : 
         node.status({fill:"red", shape:"ring", text:"connection to child failed"});
 
         // called on input to this node
