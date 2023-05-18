@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 try:
     digital_output = EdgePiDigitalOutput()
 except ModuleNotFoundError as e:
-    _logger.error(f'Failed to load EdgePi modules: {e}')
+    _logger.error('Failed to load EdgePi modules: %s',e)
     sys.exit(0)
 
 # keep receiving commands from parent process
@@ -19,7 +19,7 @@ while True:
         # get input from js file
         inputs = input()
 
-        # exit signal from parent process 
+        # exit signal from parent process
         if 'exit' in inputs:
             sys.exit(0)
 
@@ -28,11 +28,11 @@ while True:
 
         # get channel enum and state
         DOUT_Pin = inputs[0]
-        state = True if inputs[1].strip() == "true" else False
+        STATE = True if inputs[1].strip() == "true" else False
 
         # action on DOUT pin based on input gathered
         digital_output.digital_output_direction(GpioPins[DOUT_Pin], False)
-        digital_output.digital_output_state(GpioPins[DOUT_Pin], state)
-        
+        digital_output.digital_output_state(GpioPins[DOUT_Pin], STATE)
+
     except(EOFError, SystemExit, KeyboardInterrupt):
         sys.exit(0)

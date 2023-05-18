@@ -1,2 +1,2 @@
 -r requirements.txt
-pylint
+pylint==2.17.4 
