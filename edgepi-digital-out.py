@@ -6,27 +6,33 @@ from edgepi.digital_output.edgepi_digital_output import EdgePiDigitalOutput
 _logger=logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
-# arv[0] is this file's name, argv[1] should be numeric command
-if len(sys.argv) > 1:
+# create new DOUT instance
+try:
+    digital_output = EdgePiDigitalOutput()
+except ModuleNotFoundError as e:
+    _logger.error('Failed to load EdgePi modules: %s',e)
+    sys.exit(0)
+
+# keep receiving commands from parent process
+while True:
     try:
-        digital_output = EdgePiDigitalOutput()
-    except ModuleNotFoundError as e:
-        _logger.error(f'Failed to load EdgePi modules: {e}')
-        sys.exit(0)
-    
-    # keep receiving commands from parent process
-    while True:
-        try:
-            cmd = input()
-            # exit signal from parent process or user exit from child process
-            if 'exit' in cmd or cmd == '0':
-                sys.exit(0)
-            elif cmd == '5':
-                digital_output.digital_output_direction(GpioPins.DOUT4, False)
-                digital_output.digital_output_state(GpioPins.DOUT4, False)
-                print("Hello")
-        except(EOFError, SystemExit, KeyboardInterrupt):
+        # get input from js file
+        inputs = input()
+
+        # exit signal from parent process
+        if 'exit' in inputs:
             sys.exit(0)
-else:
-    print("Number of commands must equal 2")
-    
+
+        # parse input [input1,input2] -> [DOUT_Pin,state]
+        inputs = inputs.split(',')
+
+        # get channel enum and state
+        DOUT_Pin = inputs[0]
+        STATE = True if inputs[1].strip() == "true" else False
+
+        # action on DOUT pin based on input gathered
+        digital_output.digital_output_direction(GpioPins[DOUT_Pin], False)
+        digital_output.digital_output_state(GpioPins[DOUT_Pin], STATE)
+
+    except(EOFError, SystemExit, KeyboardInterrupt):
+        sys.exit(0)

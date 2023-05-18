@@ -3,9 +3,9 @@
 		category: 'Osensa EdgePi',
 		color: '#a6bbcf',
 		defaults: {
-				name: {value:"" },
-        channelType: {value:"dout1"},
-        powerOn: {value: false},
+				name: {value: ""},
+        DOUT_Pin: {value: "DOUT1"},
+        state: {value: false},
 
 		},
 		inputs:1,
@@ -23,22 +23,22 @@
 		<input type="text" id="node-input-name" placeholder="Name">
 	</div>	
   <div class="form-row">
-    <label for="node-input-channelType">Channel</label>
-    <select id="node-input-channelType">
-      <option value="dout1">D-OUT1</option>
-      <option value="dout2">D-OUT2</option>
-      <option value="dout3">D-OUT3</option>
-      <option value="dout4">D-OUT4</option>
-      <option value="dout5">D-OUT5</option>
-      <option value="dout6">D-OUT6</option>
-      <option value="dout7">D-OUT7</option>
-      <option value="dout8">D-OUT8</option>
+    <label for="node-input-DOUT_Pin">Channel</label>
+    <select id="node-input-DOUT_Pin">
+      <option value="DOUT1">D-OUT1</option>
+      <option value="DOUT2">D-OUT2</option>
+      <option value="DOUT3">D-OUT3</option>
+      <option value="DOUT4">D-OUT4</option>
+      <option value="DOUT5">D-OUT5</option>
+      <option value="DOUT6">D-OUT6</option>
+      <option value="DOUT7">D-OUT7</option>
+      <option value="DOUT8">D-OUT8</option>
     </select>
   </div>
   <div class="form-row">
     <span>
-    <input type="checkbox" name="radios" id="node-input-powerOn" style="width:auto; margin:auto !important">
-    <label for="node-input-powerOn"  style="width:auto; margin:auto !important">High/On</label>
+    <input type="checkbox" name="radios" id="node-input-state" style="width:auto; margin:auto !important">
+    <label for="node-input-state"  style="width:auto; margin:auto !important">High/On</label>
     <p style="color:#606060; display:inline; margin:auto auto auto 10px !important">(Default:Low/Off)</p>
   </span>
   </div>
