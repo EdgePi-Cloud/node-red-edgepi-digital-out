@@ -4,24 +4,28 @@
     "description": "a node for demonstrating use of Python scripts and libraries for implementing functionality. This node uses a Python script to interact with the EdgePi digital output.",
     "main": "edgepi-digital-out.js",
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint ."
     },
     "repository": {
-      "type": "git",
-      "url": "git+https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out.git"
+        "type": "git",
+        "url": "git+https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out.git"
     },
     "author": "iaj2",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out/issues"
+        "url": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out/issues"
     },
     "node-red": {
-      "nodes": {
-        "edgepi-digital-out": "edgepi-digital-out.js"
-      }
+        "nodes": {
+            "edgepi-digital-out": "edgepi-digital-out.js"
+        }
     },
     "homepage": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out#readme",
     "devDependencies": {
-      "node-red": "^2.2.2"
+        "eslint": "^8.40.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.27.5",
+        "node-red": "^2.2.2"
     }
-  }
+}

@@ -5,8 +5,8 @@ name: Pylint
 on: push
 
 jobs:
-  lint:
-    name: Linter
+  pylint:
+    name: pythonLinter
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -31,3 +31,26 @@ jobs:
       run: |
         source venv_test/bin/activate
         pylint $(git ls-files '*.py')
+  eslint:
+    name: jsLinter
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+ 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.20.0"
+          cache: "npm"
+ 
+      - name: Install npm@9.6.6
+        run: npm i -g npm@9.6.6
+ 
+      - name: Install dependencies
+        id: install-dependencies
+        run: npm ci --prefer-offline
+ 
+      - name: Lint
+        run: npm run lint
