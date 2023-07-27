@@ -4,8 +4,8 @@
 		color: '#a6bbcf',
 		defaults: {
 				name: {value: ""},
-        DOUT_Pin: {value: "DOUT1"},
-        state: {value: false},
+        DoutPin: {value: "DOUT1"},
+        DoutTriState: {value: "LOW"},
 
 		},
 		inputs:1,
@@ -36,12 +36,21 @@
     </select>
   </div>
   <div class="form-row">
+    <label for="node-input-DoutTriState">State</label>
+    <select id="node-input-DoutTriState">
+      <option value="HI_Z">HI_Z</option>
+      <option value="HIGH">HIGH</option>
+      <option value="LOW">LOW</option>
+    </select>
+  </div>
+<!--   
+  <div class="form-row">
     <span>
     <input type="checkbox" name="radios" id="node-input-state" style="width:auto; margin:auto !important">
     <label for="node-input-state"  style="width:auto; margin:auto !important">High/On</label>
     <p style="color:#606060; display:inline; margin:auto auto auto 10px !important">(Default:Low/Off)</p>
   </span>
-  </div>
+  </div> -->
 </script>
 
 

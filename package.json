@@ -1,31 +1,34 @@
 {
-    "name": "node-red-edgepi-digital-out",
-    "version": "1.0.0",
-    "description": "a node for demonstrating use of Python scripts and libraries for implementing functionality. This node uses a Python script to interact with the EdgePi digital output.",
-    "main": "edgepi-digital-out.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "eslint ."
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out.git"
-    },
-    "author": "iaj2",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out/issues"
-    },
-    "node-red": {
-        "nodes": {
-            "edgepi-digital-out": "edgepi-digital-out.js"
-        }
-    },
-    "homepage": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out#readme",
-    "devDependencies": {
-        "eslint": "^8.40.0",
-        "eslint-config-airbnb-base": "^15.0.0",
-        "eslint-plugin-import": "^2.27.5",
-        "node-red": "^2.2.2"
+  "name": "node-red-edgepi-digital-out",
+  "node-red": {
+    "nodes": {
+      "edgepi-digital-out": "edgepi-digital-out.js"
     }
+  },
+  "version": "1.0.0",
+  "description": "node-red node for edgepi digital output module utilizing remote procedure calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out.git"
+  },
+  "keywords": [
+    "node-red",
+    "edgepi",
+    "rpc"
+  ],
+  "author": "Isaac James",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out/issues"
+  },
+  "homepage": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out#readme",
+  "dependencies": {
+    "@edgepi-cloud/edgepi-rpc": "^1.0.2",
+    "node-red": "^3.0.2",
+    "zeromq": "^6.0.0-beta.17"
+  }
 }
