@@ -9,10 +9,7 @@ module.exports = function (RED) {
     // Get node properties from config
     node.DoutPin = config.DoutPin;
     node.DoutTriState = config.DoutTriState;
-
-    // log node properties
-    console.log(node.DOUT_Pin, node.DoutTriState);
-
+  
     // init new dout instance
     const dout = new rpc.DoutService()
 
@@ -25,7 +22,7 @@ module.exports = function (RED) {
       }
       else{
         try{
-          let response = await dout.set_dout_state(rpc.DoutPins[node.DOUTPin], rpc.DoutTriState[node.DoutTriState]);
+          let response = await dout.set_dout_state(rpc.DoutPins[node.DoutPin], rpc.DoutTriState[node.DoutTriState]);
           msg.payload = response;
         }
         catch(error){
@@ -34,6 +31,8 @@ module.exports = function (RED) {
         }
       }
       send(msg)
+
+      
     });
 
     node.on('close', (done) => {

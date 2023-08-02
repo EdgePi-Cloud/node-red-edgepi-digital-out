@@ -27,8 +27,9 @@
   },
   "homepage": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out#readme",
   "dependencies": {
-    "@edgepi-cloud/edgepi-rpc": "^1.0.2",
-    "node-red": "^3.0.2",
-    "zeromq": "^6.0.0-beta.17"
+    "@edgepi-cloud/edgepi-rpc": "^1.0.2"
+  },
+  "devDependencies": {
+    "node-red": "^3.0.2"
   }
 }
