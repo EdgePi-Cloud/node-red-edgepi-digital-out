@@ -1,5 +1,5 @@
 {
-  "name": "node-red-edgepi-digital-out",
+  "name": "@edgepi-cloud/node-red-edgepi-digital-out",
   "node-red": {
     "nodes": {
       "edgepi-digital-out": "edgepi-digital-out.js"
