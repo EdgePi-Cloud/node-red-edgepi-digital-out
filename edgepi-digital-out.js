@@ -1,98 +1,46 @@
-module.exports = function(RED) {
-    const spawn = require('child_process').spawn;
+module.exports = function (RED) {
+  const rpc = require('@edgepi-cloud/edgepi-rpc')
 
-    // file_path to edgepi-digital-out bash script for passing commands to Python script
-    const executablePath = __dirname + '/edgepi-digital-out'
+  function DigitalOutNode(config) {
+    // Create new node instance with config from last deploy
+    RED.nodes.createNode(this, config);
+    const node = this;
 
-    function DigitalOutNode(config) {
-        RED.nodes.createNode(this, config);
-        const node = this;
-        node.channelType = config.channelType;
-        node.powerOn = config.powerOn;
+    // Get node properties from config
+    node.DoutPin = config.DoutPin;
+    node.DoutTriState = config.DoutTriState;
+  
+    // init new dout instance
+    const dout = new rpc.DoutService()
 
-        function inputlistener(msg, send, done) {
-            if (node.child != null) {
-                // send input to child process using stdin (Py script)
-                node.child.stdin.write(command+"\n", () => {
-                    if (done) { done(); }
-                });
-                node.status({fill:"green", shape:"dot", text:"input to child sent"});
-                node.log(`edgepi-digital-out: input to parent: ${msg.payload}`);
-            }
-            else {
-                // logs error to Node-RED's console.
-                node.status({fill:"red", shape:"ring", text:"disconnected from child"});
-                node.error(RED._("edgepi-digital-out:error:child.disconnected"), msg);
-            }
-            // send message probably
-            if(node.output){
-                msg.payload = node.output;
-                send(msg)
-            }      
+    // called on input to this node
+    node.on('input', async function(msg,send,done){
+      // Ensure config
+      if(!node.DoutPin || !node.DoutTriState){
+        console.error("Please configure node")
+        msg.payload = "Please configure node"
+      }
+      else{
+        try{
+          let response = await dout.set_dout_state(rpc.DoutPins[node.DoutPin], rpc.DoutTriState[node.DoutTriState]);
+          msg.payload = response;
         }
-        
-        // log node properties and command
-        console.log(node.channelType);
-        console.log(node.powerOn);
-        console.log(command);
-        
-        node.child = spawn(executablePath, [command]);
+        catch(error){
+          msg.payload = error;
+          console.error(error)
+        }
+      }
+      send(msg)
 
-        // to-do: handle spawn error
-        
-        node.child ? node.status({fill:"green", shape:"ring", text:"connected to child"}) :
-        node.status({fill:"red", shape:"ring", text:"connection to child failed"});
+      
+    });
 
-        // called on input to this node
-        node.on("input", inputlistener);
-
-        // listen to output from child process
-        node.child.stdout.on('data', function (data) {
-            node.output = data;
-            node.log(`edgepi-digital-out: child output: ${data}`);
-        });
-
-        node.child.stderr.on('data', function (data) {
-            // Py logger prints to stderr
-            if (data.includes("INFO"))
-                node.log(data);
-            else
-                node.error(RED._(`edgepi-digital-out:error:childprocess-stderr: ${data}`));
-        });
-
-        /* 
-            This method handles close events emitted by the child process. On close,
-            a numeric exit code is passed by the child process to the parent through the argument code.
-
-            Exit Code: 0 -- child process exited with no error.
-            Exit Code: Non-zero --child process exited with error.
-
-            For a complete list of exit codes, please refer to https://node.readthedocs.io/en/latest/api/process/.
-         */
-        node.child.on("close", function(code) {
-            node.child = null;
-            if (node.finished) {
-                node.finished();
-                node.log(`edgepi-digital-out: child process exit code: ${code}`);
-                node.status({fill:"grey",shape:"ring",text:"child process closed."});
-            }
-            else {
-                node.status({fill:"red",shape:"ring",text:"child process stopped before parent"});
-                node.warn(RED._(`edgepi-digital-out:warning: childprocess disconnected with exit code: ${code}`));
-            }
-        });
-
-        // handle exit from parent process
-        node.on("close", function(done) {
-            node.status({fill:"grey", shape:"ring", text:"parent process terminated"});
-            if (node.child != null) {
-                node.finished = done;
-                node.child.stdin.write("exit");
-                node.child.kill(); 
-                node.log("edgepi-digital-out: exited parent process");
-            }
-            else { done(); }
-        });
-    }
-    RED.nodes.registerType("edgepi-digital-out-node", DigitalOutNode);
-}
+    node.on('close', (done) => {
+      node.status({ fill: 'grey', shape: 'ring', text: 'digital-out node terminated' });
+      done();
+    });
+  }
+  
+  RED.nodes.registerType('edgepi-digital-out-node', DigitalOutNode);
+  
+};
