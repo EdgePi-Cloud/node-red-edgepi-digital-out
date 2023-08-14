@@ -2,7 +2,7 @@ module.exports = function (RED) {
   const rpc = require('@edgepi-cloud/edgepi-rpc')
 
   function DigitalOutNode(config) {
-    // Create new node instance with config from last deploy
+    // Create new node instance with user config
     RED.nodes.createNode(this, config);
     const node = this;
     const ipc_transport = "ipc:///tmp/edgepi.pipe"
@@ -16,10 +16,14 @@ module.exports = function (RED) {
     // init new dout instance
     const dout = new rpc.DoutService()
 
-    // called on input to this node
+    if (dout){
+      console.debug("Digital Output node initialized on:", transport);
+      node.status({fill:"green", shape:"ring", text:"d-out initialized"});
+    }
+
+    // Input event listener
     node.on('input', async function(msg,send,done){
-      // Ensure config
-      
+      node.status({fill:"green", shape:"dot", text:"input recieved"});
       try{
         let response = await dout.set_dout_state(rpc.DoutPins[node.DoutPin], rpc.DoutTriState[node.DoutTriState]);
         msg.payload = response;
@@ -30,8 +34,10 @@ module.exports = function (RED) {
       }
       
       send(msg)
-
       
+      if (done) {
+        done();
+      }
     });
 
     node.on('close', (done) => {
