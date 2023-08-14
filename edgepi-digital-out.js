@@ -14,7 +14,7 @@ module.exports = function (RED) {
     node.DoutTriState = config.DoutTriState;
   
     // init new dout instance
-    const dout = new rpc.DoutService()
+    const dout = new rpc.DoutService(transport)
 
     if (dout){
       console.debug("Digital Output node initialized on:", transport);
