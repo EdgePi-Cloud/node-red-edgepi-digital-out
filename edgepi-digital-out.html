@@ -112,5 +112,27 @@
 
 
 <script type="text/html" data-help-name="edgepi-digital-out-node">
-	<p>Node for EdgePi Digital Output</p>
+	<p>EdgePi digital input node that gets the state of a given input channel.</p>
+	<h3>Properties</h3>
+	<dl class="message-properties">
+		<dt> RPC Server</dt>
+		<dd>The connection to your EdgePi's RPC Server. </dd>
+    <dt>Channel</dt>
+    <dd>The channel you want to configure.</dd>
+    <dt>State</dt>
+    <dd>The state you want to set the selected channel to.</dd>
+	</dl>
+	<h3>Inputs</h3>
+		<dl class="message-properties">
+			Any message can be used to trigger this node.
+		</dl>
+	<h3>Outputs</h3>
+		<dl class="message-properties">
+			<dt>payload <span class="property-type">string</span></dt>
+			<dd>A success message stating the configured channel's changed state.</dd>
+		</dl>
+	<h3>References</h3>
+		<ul>
+			<li><a href="https://github.com/edgepi-cloud/node-red-digital-out">GitHub</a> -the node's github repository </li>
+		</ul>
 </script>
