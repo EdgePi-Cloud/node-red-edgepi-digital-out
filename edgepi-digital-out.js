@@ -40,10 +40,6 @@ module.exports = function (RED) {
       }
     });
 
-    node.on('close', (done) => {
-      node.status({ fill: 'grey', shape: 'ring', text: 'digital-out node terminated' });
-      done();
-    });
   }
   
   RED.nodes.registerType('edgepi-digital-out-node', DigitalOutNode);
