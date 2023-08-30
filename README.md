@@ -1,38 +1,27 @@
 # node-red-edgepi-digital-out
 
-## Installation: Node-Red on Debian
-Install a supported version of Node.js: https://nodered.org/docs/faq/node-versions
+## EdgePi digital output node
+
+EdgePi digital output node that configures the state of a given output channel.
+
+## Install
+Install normally through the node-red editor or install with npm in your node-red directory
+(typically located  at `~/node.red`) by running the following command:
 ```
-    $ sudo apt install curl
-    $ curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-    $ sudo apt install nodejs
-```
-   Verify Node.js installed: 
-```
-$ node -v
-```
-Verify npm installed: 
-```
-$ npm -v
-```
-3. Install Node-Red with npm
-```
-$ cd ~
-$ sudo npm install -g --unsafe-perm node-red
+npm install @edgepi-cloud/node-red-edgepi-digital-out
 ```
 
-4. Install Node Red Dashboard
-```
-$ cd ~/.node-red
-$ npm i node-red-dashboard
-```
+### Properties
+- **RPC Server**<br> 
+The connection to your EdgePi's RPC Server.
+- **Channel**<br>
+The channel you want to configure.
+- **State**<br>
+The state you want to set the selected channel to.
 
-## Installation of this node
-```
-$ npm install @edgepi-cloud/node-red-edgepi-digital-out
-```
+### Inputs
+Any message can be used to trigger this node.
 
-## Running Node-Red
-```
-$ node-red
-```
+### Outputs
+- **payload** *string*<br>
+A success message stating the configured channel's changed state.
