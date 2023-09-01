@@ -20,12 +20,16 @@ module.exports = function (RED) {
       console.debug("Digital Output node initialized on:", transport);
       node.status({fill:"green", shape:"ring", text:"d-out initialized"});
     }
+    else{
+      node.status({fill:"red", shape:"ring", text:"d-out failed to initialize"})
+      throw new Error("Digital output failed to initialize.")
+    }
 
     // Input event listener
     node.on('input', async function(msg,send,done){
       node.status({fill:"green", shape:"dot", text:"input recieved"});
       try{
-        let response = await dout.set_dout_state(rpc.DoutPins[node.DoutPin], rpc.DoutTriState[node.DoutTriState]);
+        const response = await dout.setDoutState(rpc.DOUTPins[config.DoutPin], rpc.DoutTriState[config.DoutTriState]);
         msg.payload = response;
       }
       catch(error){
