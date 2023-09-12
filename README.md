@@ -25,3 +25,7 @@ Any message can be used to trigger this node.
 ### Outputs
 - **payload** *string*<br>
 A success message stating the configured channel's changed state.
+
+
+**NOTE:** Currently, EdgePi nodes are only available on x86 systems.
+
