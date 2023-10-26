@@ -46,6 +46,6 @@ module.exports = function (RED) {
 
   }
   
-  RED.nodes.registerType('edgepi-digital-out-node', DigitalOutNode);
+  RED.nodes.registerType('digital-out', DigitalOutNode);
   
 };

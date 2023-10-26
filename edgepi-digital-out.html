@@ -1,7 +1,7 @@
 <script type="text/javascript">
-	RED.nodes.registerType('edgepi-digital-out-node',{
-		category: 'Osensa EdgePi',
-		color: '#a6bbcf',
+	RED.nodes.registerType('digital-out',{
+		category: 'EdgePi',
+		color: '#f391aa',
 		defaults: {
 				name: {value: ""},
         transport: { value: "Local" },
@@ -15,7 +15,7 @@
 		outputs:1,
 	  icon: "right-arrow.svg",
 		label: function() {
-			return this.name||"digial-out-node";
+			return this.name||"digial-out";
     },
     oneditprepare: function(){
       // Query html elements
@@ -35,7 +35,7 @@
   }
 	});
 </script>
-<script type="text/html" data-template-name="edgepi-digital-out-node">
+<script type="text/html" data-template-name="digital-out">
 
   <style>
     *{
@@ -58,7 +58,7 @@
     }
 
     .tcp-address-input{
-        width: 110px !important;
+        width: 160px !important;
         margin-left: 100px !important;
     }
     .tcp-port-input{
@@ -72,23 +72,23 @@
 </style>
 
 	<div class="form-row">
-		<label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+		<label for="node-input-name"><i class="fa fa-tag"></i> Name:</label>
 		<input type="text" id="node-input-name" placeholder="Name">
 	</div>	
   <div class="form-row transport">
-    <label for="node-input-transport">Rpc Server:</label>
+    <label for="node-input-transport">RPC Server:</label>
     <select id="node-input-transport">
       <option value="Local">Local</option>
       <option value="Network">Network</option>
     </select>
   </div>
   <div class="form-row tcp" >
-    <input class ="tcp-address-input" type="text" id="node-input-tcpAddress" placeholder="IP Address">
+    <input class ="tcp-address-input" type="text" id="node-input-tcpAddress" placeholder="IP Address/ Hostname">
     <label class="tcp-port-label" for="node-input-tcpPort">:</label>
     <input class="tcp-port-input" type="text" id="node-input-tcpPort" placeholder="Port">
   </div>
   <div class="form-row">
-    <label for="node-input-DoutPin">Channel</label>
+    <label for="node-input-DoutPin">Channel:</label>
     <select id="node-input-DoutPin">
       <option value="DOUT1">D-OUT1</option>
       <option value="DOUT2">D-OUT2</option>
@@ -101,7 +101,7 @@
     </select>
   </div>
   <div class="form-row">
-    <label for="node-input-DoutTriState">State</label>
+    <label for="node-input-DoutTriState">State:</label>
     <select id="node-input-DoutTriState">
       <option value="HI_Z">HI_Z</option>
       <option value="HIGH">HIGH</option>
@@ -111,8 +111,12 @@
 </script>
 
 
-<script type="text/html" data-help-name="edgepi-digital-out-node">
-	<p>EdgePi digital output node that sets the state of a given output channel.</p>
+<script type="text/html" data-help-name="digital-out">
+	<p>Sets the state of a given digital output channel on the EdgePi. The state 
+    can be set to either of LOW, corresponding to a logical 0, HIGH, corresponding  
+    to a logical 1, or HI_Z, in which the signal is not driven by the digital  
+    output channel.
+  </p>
 	<h3>Properties</h3>
 	<dl class="message-properties">
 		<dt> RPC Server</dt>
