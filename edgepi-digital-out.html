@@ -1,80 +1,80 @@
 <script type="text/javascript">
-	RED.nodes.registerType('digital-out',{
-		category: 'EdgePi',
-		color: '#f391aa',
-		defaults: {
-				name: {value: ""},
-        transport: { value: "Local" },
-        tcpAddress: { value: "" },
-        tcpPort: { value: "" },
-        DoutPin: {value: "DOUT1"},
-        DoutTriState: {value: "LOW"},
-
-		},
-		inputs:1,
-		outputs:1,
-	  icon: "right-arrow.svg",
-		label: function() {
-			return this.name||"digial-out";
+  RED.nodes.registerType("digital-out", {
+    category: "EdgePi",
+    color: "#f391aa",
+    defaults: {
+      name: { value: "" },
+      transport: { value: "Local" },
+      tcpAddress: { value: "" },
+      tcpPort: { value: "" },
+      DoutPin: { value: "DOUT1" },
+      DoutTriState: { value: "LOW" },
     },
-    oneditprepare: function(){
-      // Query html elements
-      const configTransportSelect = document.getElementById("node-input-transport");
-      const tcpField = document.querySelector(".form-row.tcp")
+    inputs: 1,
+    outputs: 1,
+    icon: "right-arrow.svg",
+    label: function () {
+      return this.name || "digial-out";
+    },
+    oneditprepare: function () {
+      const configTransportSelect = document.getElementById(
+        "node-input-transport"
+      );
+      const tcpField = document.querySelector(".form-row.tcp");
 
-      function updateEditor(){
-          if(configTransportSelect.value === "Network"){
-              tcpField.style.display = "flex";
-          } else {
-              tcpField.style.display = "none";
-          }
+      function updateEditor() {
+        if (configTransportSelect.value === "Network") {
+          tcpField.style.display = "flex";
+        } else {
+          tcpField.style.display = "none";
+        }
       }
-      // Update and add event listener to update on user input
-      updateEditor()
+      updateEditor();
       configTransportSelect.addEventListener("change", updateEditor);
-  }
-	});
+    },
+  });
 </script>
 <script type="text/html" data-template-name="digital-out">
-
   <style>
-    *{
-        box-sizing: border-box !important;
+    * {
+      box-sizing: border-box !important;
     }
 
-    .form-row{
-        display: flex;
-        align-items: center;
+    .form-row {
+      display: flex;
+      align-items: center;
     }
 
-    .form-row>label{
-        margin-top: auto; margin-bottom: auto;
+    .form-row > label {
+      margin-top: auto;
+      margin-bottom: auto;
     }
 
     .form-row.tcp {
-        flex-direction: row;
-        align-items: center;
-        margin-top: -5px; margin-bottom: 10px;
+      flex-direction: row;
+      align-items: center;
+      margin-top: -5px;
+      margin-bottom: 10px;
     }
 
-    .tcp-address-input{
-        width: 160px !important;
-        margin-left: 100px !important;
+    .tcp-address-input {
+      width: 160px !important;
+      margin-left: 100px !important;
     }
-    .tcp-port-input{
-        width: 60px !important;
+    .tcp-port-input {
+      width: 60px !important;
     }
 
-    .tcp-port-label{
-        width: 5px !important;
-        margin: auto 5px;
+    .tcp-port-label {
+      width: 5px !important;
+      margin: auto 5px;
     }
-</style>
+  </style>
 
-	<div class="form-row">
-		<label for="node-input-name"><i class="fa fa-tag"></i> Name:</label>
-		<input type="text" id="node-input-name" placeholder="Name">
-	</div>	
+  <div class="form-row">
+    <label for="node-input-name"><i class="fa fa-tag"></i> Name:</label>
+    <input type="text" id="node-input-name" placeholder="Name" />
+  </div>
   <div class="form-row transport">
     <label for="node-input-transport">RPC Server:</label>
     <select id="node-input-transport">
@@ -82,10 +82,20 @@
       <option value="Network">Network</option>
     </select>
   </div>
-  <div class="form-row tcp" >
-    <input class ="tcp-address-input" type="text" id="node-input-tcpAddress" placeholder="IP Address/ Hostname">
+  <div class="form-row tcp">
+    <input
+      class="tcp-address-input"
+      type="text"
+      id="node-input-tcpAddress"
+      placeholder="IP Address/ Hostname"
+    />
     <label class="tcp-port-label" for="node-input-tcpPort">:</label>
-    <input class="tcp-port-input" type="text" id="node-input-tcpPort" placeholder="Port">
+    <input
+      class="tcp-port-input"
+      type="text"
+      id="node-input-tcpPort"
+      placeholder="Port"
+    />
   </div>
   <div class="form-row">
     <label for="node-input-DoutPin">Channel:</label>
@@ -110,33 +120,37 @@
   </div>
 </script>
 
-
 <script type="text/html" data-help-name="digital-out">
-	<p>Sets the state of a given digital output channel on the EdgePi. The state 
-    can be set to either of LOW, corresponding to a logical 0, HIGH, corresponding  
-    to a logical 1, or HI_Z, in which the signal is not driven by the digital  
-    output channel.
+  <p>
+    Sets the state of a given digital output channel on the EdgePi. The state
+    can be set to either of LOW, HIGH, or HI_Z, in which the signal is not
+    driven by the digital output channel.
   </p>
-	<h3>Properties</h3>
-	<dl class="message-properties">
-		<dt> RPC Server</dt>
-		<dd>The connection to your EdgePi's RPC Server. </dd>
+  <h3>Properties</h3>
+  <dl class="message-properties">
+    <dt>RPC Server</dt>
+    <dd>The connection to your EdgePi's RPC Server.</dd>
     <dt>Channel</dt>
-    <dd>The channel you want to configure.</dd>
+    <dd>The channel being configured.</dd>
     <dt>State</dt>
-    <dd>The state you want to set the selected channel to.</dd>
-	</dl>
-	<h3>Inputs</h3>
-		<dl class="message-properties">
-			Any message can be used to trigger this node.
-		</dl>
-	<h3>Outputs</h3>
-		<dl class="message-properties">
-			<dt>payload <span class="property-type">string</span></dt>
-			<dd>A success message stating the configured channel's changed state.</dd>
-		</dl>
-	<h3>References</h3>
-		<ul>
-			<li><a href="https://github.com/edgepi-cloud/node-red-digital-out">GitHub</a> -the node's github repository </li>
-		</ul>
+    <dd>The state to set the selected channel to.</dd>
+  </dl>
+  <h3>Inputs</h3>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">string</span></dt>
+    <dd>The D-OUT state.</dd>
+    <dt>channel <span class="property-type">number</span></dt>
+  </dl>
+  <h3>Outputs</h3>
+  <dl class="message-properties">
+    <dt>payload <span class="property-type">string</span></dt>
+    <dd>A success message stating the configured channel's changed state.</dd>
+  </dl>
+  <h3>References</h3>
+  <ul>
+    <li>
+      <a href="https://github.com/edgepi-cloud/node-red-digital-out">GitHub</a>
+      -the node's github repository
+    </li>
+  </ul>
 </script>

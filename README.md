@@ -15,17 +15,17 @@ npm install @edgepi-cloud/node-red-edgepi-digital-out
 - **RPC Server**<br> 
 The connection to your EdgePi's RPC Server.
 - **Channel**<br>
-The channel you want to configure.
+The channel being configured.
 - **State**<br>
-The state you want to set the selected channel to.
+The state to set the selected channel to.
 
 ### Inputs
-Any message can be used to trigger this node.
+- **payload** *string*<br>
+The D-OUT state.
+- **channel** *number*<br>
 
 ### Outputs
 - **payload** *string*<br>
 A success message stating the configured channel's changed state.
 
-
-**NOTE:** Currently, EdgePi nodes are only available on x86 systems.
 
