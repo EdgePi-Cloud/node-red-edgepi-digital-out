@@ -24,8 +24,21 @@ The state to set the selected channel to.
 The D-OUT state.
 - **channel** *number*<br>
 
+Example input:
+```
+msg {
+    "payload": "LOW",
+    "channel": 2
+}
+```
+
 ### Outputs
 - **payload** *string*<br>
 A success message stating the configured channel's changed state.
 
-
+Example output:
+```
+msg {
+    "payload": "Successfully set DoutPins.DOUT2 to DoutTriState.LOW."
+}
+```

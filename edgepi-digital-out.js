@@ -4,32 +4,35 @@ module.exports = function (RED) {
   function DigitalOutNode(config) {
     RED.nodes.createNode(this, config);
     const node = this;
+    let channel = config.channel;
+    let doutState = config.doutState;
 
-    setInitialConfigs(config).then((dout) => {
+    initializeNode(config).then((dout) => {
       node.on("input", async function (msg, send, done) {
         node.status({ fill: "green", shape: "dot", text: "input recieved" });
         try {
-          const channel = "DOUT" + msg.channel.toString();
-          msg.payload = await dout.setDoutState(
-            rpc.DOUTPins[channel],
-            rpc.DoutTriState[msg.state]
-          );
+          channel = msg.channel ?? channel;
+          doutState = msg.payload ?? doutState;
+          msg = {
+            payload: await dout.setDoutState(
+              channel - 1,
+              rpc.DoutTriState[doutState]
+            ),
+          };
         } catch (error) {
-          msg.payload = error;
+          msg = { payload: error };
           console.error(error);
         }
         send(msg);
-        if (done) {
-          done();
-        }
+        done?.();
       });
     });
 
-    async function setInitialConfigs(config) {
-      const ipc_transport = "ipc:///tmp/edgepi.pipe";
-      const tcp_transport = `tcp://${config.tcpAddress}:${config.tcpPort}`;
+    async function initializeNode(config) {
       const transport =
-        config.transport === "Network" ? tcp_transport : ipc_transport;
+        config.transport === "Network"
+          ? `tcp://${config.tcpAddress}:${config.tcpPort}`
+          : "ipc:///tmp/edgepi.pipe";
 
       try {
         const dout = new rpc.DoutService(transport);
@@ -39,9 +42,11 @@ module.exports = function (RED) {
           shape: "ring",
           text: "d-out initialized",
         });
-        await dout.setDoutState(
-          rpc.DOUTPins[config.DoutPin],
-          rpc.DoutTriState[config.DoutTriState]
+        console.info(
+          await dout.setDoutState(
+            channel - 1,
+            rpc.DoutTriState[config.doutState]
+          )
         );
         return dout;
       } catch (error) {

@@ -7,8 +7,8 @@
       transport: { value: "Local" },
       tcpAddress: { value: "" },
       tcpPort: { value: "" },
-      DoutPin: { value: "DOUT1" },
-      DoutTriState: { value: "LOW" },
+      channel: { value: "DOUT1" },
+      doutState: { value: "LOW" },
     },
     inputs: 1,
     outputs: 1,
@@ -100,14 +100,14 @@
   <div class="form-row">
     <label for="node-input-DoutPin">Channel:</label>
     <select id="node-input-DoutPin">
-      <option value="DOUT1">D-OUT1</option>
-      <option value="DOUT2">D-OUT2</option>
-      <option value="DOUT3">D-OUT3</option>
-      <option value="DOUT4">D-OUT4</option>
-      <option value="DOUT5">D-OUT5</option>
-      <option value="DOUT6">D-OUT6</option>
-      <option value="DOUT7">D-OUT7</option>
-      <option value="DOUT8">D-OUT8</option>
+      <option value=1>D-OUT1</option>
+      <option value=2>D-OUT2</option>
+      <option value=3>D-OUT3</option>
+      <option value=4>D-OUT4</option>
+      <option value=5>D-OUT5</option>
+      <option value=6>D-OUT6</option>
+      <option value=7>D-OUT7</option>
+      <option value=8>D-OUT8</option>
     </select>
   </div>
   <div class="form-row">
@@ -123,8 +123,7 @@
 <script type="text/html" data-help-name="digital-out">
   <p>
     Sets the state of a given digital output channel on the EdgePi. The state
-    can be set to either of LOW, HIGH, or HI_Z, in which the signal is not
-    driven by the digital output channel.
+    can be set to LOW, HIGH, or HI_Z.
   </p>
   <h3>Properties</h3>
   <dl class="message-properties">
