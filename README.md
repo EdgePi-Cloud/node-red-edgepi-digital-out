@@ -21,7 +21,7 @@ The state to set the selected channel to.
 
 ### Inputs
 - **payload** *string*<br>
-The D-OUT state.
+The D-OUT state. Either 'LOW', 'HIGH', or 'HI_Z'.
 - **channel** *number*<br>
 
 Example input:

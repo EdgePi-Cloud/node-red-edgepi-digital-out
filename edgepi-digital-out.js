@@ -11,8 +11,8 @@ module.exports = function (RED) {
       node.on("input", async function (msg, send, done) {
         node.status({ fill: "green", shape: "dot", text: "input recieved" });
         try {
-          channel = msg.channel ?? channel;
-          doutState = msg.payload ?? doutState;
+          channel = msg.channel || channel;
+          doutState = msg.payload || doutState;
           msg = {
             payload: await dout.setDoutState(
               channel - 1,
