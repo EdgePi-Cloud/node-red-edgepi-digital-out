@@ -12,7 +12,10 @@ module.exports = function (RED) {
         node.status({ fill: "green", shape: "dot", text: "input recieved" });
         try {
           channel = msg.channel || channel;
-          doutState = msg.payload || doutState;
+          doutState =
+            msg.payload && typeof msg.payload === "string"
+              ? msg.payload
+              : doutState;
           msg = {
             payload: await dout.setDoutState(
               channel - 1,
