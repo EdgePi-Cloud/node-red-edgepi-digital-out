@@ -9,13 +9,10 @@ module.exports = function (RED) {
 
     initializeNode(config).then((dout) => {
       node.on("input", async function (msg, send, done) {
-        node.status({ fill: "green", shape: "dot", text: "input recieved" });
+        node.status({ fill: "green", shape: "dot", text: "input received" });
         try {
           channel = msg.channel || channel;
-          doutState =
-            msg.payload && typeof msg.payload === "string"
-              ? msg.payload
-              : doutState;
+          doutState = msg.payload || doutState;
           msg = {
             payload: await dout.setDoutState(
               channel - 1,

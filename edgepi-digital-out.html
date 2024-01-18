@@ -100,14 +100,14 @@
   <div class="form-row">
     <label for="node-input-DoutPin">Channel:</label>
     <select id="node-input-DoutPin">
-      <option value=1>D-OUT1</option>
-      <option value=2>D-OUT2</option>
-      <option value=3>D-OUT3</option>
-      <option value=4>D-OUT4</option>
-      <option value=5>D-OUT5</option>
-      <option value=6>D-OUT6</option>
-      <option value=7>D-OUT7</option>
-      <option value=8>D-OUT8</option>
+      <option value="1">D-OUT1</option>
+      <option value="2">D-OUT2</option>
+      <option value="3">D-OUT3</option>
+      <option value="4">D-OUT4</option>
+      <option value="5">D-OUT5</option>
+      <option value="6">D-OUT6</option>
+      <option value="7">D-OUT7</option>
+      <option value="8">D-OUT8</option>
     </select>
   </div>
   <div class="form-row">
@@ -128,7 +128,11 @@
   <h3>Properties</h3>
   <dl class="message-properties">
     <dt>RPC Server</dt>
-    <dd>The connection to your EdgePi's RPC Server.</dd>
+    <dd>
+      The connection to your EdgePi's RPC Server. Use <strong>Local</strong> if
+      node-red is running on EdgePi. Otherwise use the
+      <strong>Network</strong> option and enter EdgePi's IP address / Hostname.
+    </dd>
     <dt>Channel</dt>
     <dd>The channel being configured.</dd>
     <dt>State</dt>
