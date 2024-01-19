@@ -17,20 +17,18 @@
       return this.name || "digial-out";
     },
     oneditprepare: function () {
-      const configTransportSelect = document.getElementById(
-        "node-input-transport"
-      );
-      const tcpField = document.querySelector(".form-row.tcp");
+      const transportType = document.getElementById("node-input-transport");
+      const tcpTransportInputs = document.querySelector(".form-row.tcp");
 
       function updateEditor() {
-        if (configTransportSelect.value === "Network") {
-          tcpField.style.display = "flex";
+        if (transportType.value === "Network") {
+          tcpTransportInputs.style.display = "flex";
         } else {
-          tcpField.style.display = "none";
+          tcpTransportInputs.style.display = "none";
         }
       }
       updateEditor();
-      configTransportSelect.addEventListener("change", updateEditor);
+      transportType.addEventListener("change", updateEditor);
     },
   });
 </script>
