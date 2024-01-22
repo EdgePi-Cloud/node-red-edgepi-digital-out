@@ -4,15 +4,20 @@ module.exports = function (RED) {
   function DigitalOutNode(config) {
     RED.nodes.createNode(this, config);
     const node = this;
-    let channel = config.channel;
-    let doutState = config.doutState;
+
+    let { channel, doutState } = config;
 
     initializeNode(config).then((dout) => {
       node.on("input", async function (msg, send, done) {
-        node.status({ fill: "green", shape: "dot", text: "input recieved" });
+        node.status({ fill: "green", shape: "dot", text: "input received" });
         try {
-          channel = msg.channel || channel;
-          doutState = msg.payload || doutState;
+          if (msg.channel) {
+            channel = msg.channel;
+          }
+          if (msg.payload) {
+            doutState = msg.payload;
+          }
+
           msg = {
             payload: await dout.setDoutState(
               channel - 1,
