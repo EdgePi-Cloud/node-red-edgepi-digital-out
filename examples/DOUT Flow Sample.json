@@ -1,0 +1,86 @@
+[
+    {
+        "id": "62a9375e79f9fbed",
+        "type": "digital-out",
+        "z": "aa7eb918109cfafe",
+        "name": "",
+        "transport": "Local",
+        "tcpAddress": "",
+        "tcpPort": "",
+        "channel": "DOUT1",
+        "doutState": "LOW",
+        "x": 360,
+        "y": 980,
+        "wires": [
+            [
+                "43b7cd1f82cf8e8c"
+            ]
+        ]
+    },
+    {
+        "id": "79821479ad96bf93",
+        "type": "inject",
+        "z": "aa7eb918109cfafe",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "channel",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "HI_Z",
+        "payloadType": "str",
+        "x": 90,
+        "y": 980,
+        "wires": [
+            [
+                "62a9375e79f9fbed"
+            ]
+        ]
+    },
+    {
+        "id": "b23ab3e95d7aaf43",
+        "type": "inject",
+        "z": "aa7eb918109cfafe",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 1020,
+        "wires": [
+            [
+                "62a9375e79f9fbed"
+            ]
+        ]
+    },
+    {
+        "id": "43b7cd1f82cf8e8c",
+        "type": "debug",
+        "z": "aa7eb918109cfafe",
+        "name": "debug dout output",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 980,
+        "wires": []
+    }
+]
