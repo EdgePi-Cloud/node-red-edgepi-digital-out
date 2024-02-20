@@ -1,11 +1,15 @@
 {
   "name": "@edgepi-cloud/node-red-edgepi-digital-out",
   "node-red": {
+    "version": ">=3.0.2",
     "nodes": {
       "edgepi-digital-out": "edgepi-digital-out.js"
     }
   },
-  "version": "1.0.11",
+  "engines": {
+    "node": ">=14"
+  },
+  "version": "1.0.12",
   "description": "node-red node for edgepi digital output module utilizing remote procedure calls",
   "main": "index.js",
   "scripts": {
@@ -27,9 +31,9 @@
   },
   "homepage": "https://github.com/EdgePi-Cloud/node-red-edgepi-digital-out#readme",
   "dependencies": {
-    "@edgepi-cloud/edgepi-rpc": "^1.1.1"
+    "@edgepi-cloud/edgepi-rpc": "^1.1.3"
   },
   "devDependencies": {
-    "node-red": "^3.1.3"
+    "node-red": "^3.1.5"
   }
 }
